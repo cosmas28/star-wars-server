@@ -2,24 +2,15 @@ import express, {Request, Response} from "express";
 import cors from "cors";
 import {ApolloServer, gql} from "apollo-server-express";
 
-const PEOPLE = [
-	{
-		name: "Luke Skywalker",
-		height: "172",
-		gender: "male",
-		mass: "77", 
-		homeworld: "http://swapi.dev/api/planets/1/",
-	},
-	{
-		name: "C-3PO",
-		height: "167",
-		gender: "n/a",
-		mass: "75",
-		homeworld: "http://swapi.dev/api/planets/1/",
-	},
-];
+import {PeopleAPI} from "./datasources/people";
 
 const typeDefs = gql`
+	type PeopleData {
+		count: Int
+		next: String
+		previous: String
+		people: [Person]!
+	}
 	type Person {
 		name: String!
 		height: String
@@ -29,20 +20,33 @@ const typeDefs = gql`
 	}
 
 	type Query {
-		people: [Person]!
-		person(name: String!): Person
+		peopleData(page: Int): PeopleData!
+		person(name: String!): PeopleData
 	}
 `;
 
+type DataSourceType = {
+	dataSources: {
+		peopleAPI: PeopleAPI;
+	};
+};
+
 const resolvers = {
 	Query: {
-		people: () => PEOPLE,
+		peopleData: (_: any, {page}: {page: number}, {dataSources}: DataSourceType) => dataSources.peopleAPI.getAllPeople(page),
+		person: (_: any, {name}: {name: string}, {dataSources}: DataSourceType) => dataSources.peopleAPI.getPersonByName(name),
 	}
 }
 
 const app = express();
 app.use(cors());
-const server = new ApolloServer({typeDefs, resolvers});
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	dataSources: () => ({
+		peopleAPI: new PeopleAPI(),
+	})
+});
 server.applyMiddleware({app, path: "/"});
 
 app.listen(8000, () => {
