@@ -1,4 +1,7 @@
 import {RESTDataSource} from "apollo-datasource-rest";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 type APIResponseType = {
 	count: number;
@@ -44,7 +47,7 @@ type Person = {
 export class PeopleAPI extends RESTDataSource {
 	constructor() {
 		super();
-		this.baseURL = "https://swapi.dev/api/";
+		this.baseURL = process.env.STAR_WARS_BASE_URL;
 	}
 
 	peopleReducer(peopleData: APIResponseType): PeopleData {
