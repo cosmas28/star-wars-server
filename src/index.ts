@@ -1,42 +1,10 @@
-import express, {Request, Response} from "express";
+import {ApolloServer} from "apollo-server-express";
+import express from "express";
 import cors from "cors";
-import {ApolloServer, gql} from "apollo-server-express";
 
 import {PeopleAPI} from "./datasources/people";
-
-const typeDefs = gql`
-	type PeopleData {
-		count: Int
-		next: String
-		previous: String
-		people: [Person]!
-	}
-	type Person {
-		name: String!
-		height: String
-		gender: String
-		mass: String 
-		homeworld: String
-	}
-
-	type Query {
-		peopleData(page: Int): PeopleData!
-		person(name: String!): PeopleData
-	}
-`;
-
-type DataSourceType = {
-	dataSources: {
-		peopleAPI: PeopleAPI;
-	};
-};
-
-const resolvers = {
-	Query: {
-		peopleData: (_: any, {page}: {page: number}, {dataSources}: DataSourceType) => dataSources.peopleAPI.getAllPeople(page),
-		person: (_: any, {name}: {name: string}, {dataSources}: DataSourceType) => dataSources.peopleAPI.getPersonByName(name),
-	}
-}
+import {resolvers} from "./resolvers";
+import {typeDefs} from "./schema";
 
 const app = express();
 app.use(cors());
