@@ -69,8 +69,8 @@ export class PeopleAPI extends RESTDataSource {
 		}
 	}
 
-	async getAllPeople(page: number) {
-		const response = await this.get("people", {page});
+	async getAllPeople(page: number = 1, search: string = "") {
+		const response = await this.get("people", {page, search});
 
 		return this.peopleReducer(response);
 	}

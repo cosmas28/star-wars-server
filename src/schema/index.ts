@@ -16,7 +16,7 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		peopleData(page: Int): PeopleData!
+		peopleData(page: Int, search: String): PeopleData!
 		person(name: String!): PeopleData
 	}
 `;
