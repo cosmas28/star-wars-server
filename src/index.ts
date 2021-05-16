@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import {PeopleAPI} from "./datasources/people";
+import {PlanetAPI} from "./datasources/planet";
 import {resolvers} from "./resolvers";
 import {typeDefs} from "./schema";
 
@@ -16,6 +17,7 @@ const server = new ApolloServer({
 	resolvers,
 	dataSources: () => ({
 		peopleAPI: new PeopleAPI(),
+		planetAPI: new PlanetAPI(),
 	})
 });
 server.applyMiddleware({app, path: "/"});
