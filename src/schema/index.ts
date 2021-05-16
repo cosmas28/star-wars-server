@@ -40,7 +40,7 @@ export const typeDefs = gql`
     climate: String 
     gravity: String 
     terrain: String
-    surface_water: String 
+    surfaceWater: String 
     population: String
 		residents: Int
 		films: Int
@@ -51,6 +51,6 @@ export const typeDefs = gql`
 	type Query {
 		peopleData(page: Int, search: String): PeopleData!
 		person(name: String!): AllPersonDetails
-		planet(planetURL: String!): Planet
+		planet(id: String!): Planet
 	}
 `;
