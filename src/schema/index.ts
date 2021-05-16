@@ -32,9 +32,25 @@ export const typeDefs = gql`
 		edited: String
 		url: String
 	}
+	type Planet {
+		name: String 
+    rotationPeriod: String
+    orbitalPeriod:String
+    diameter: String 
+    climate: String 
+    gravity: String 
+    terrain: String
+    surface_water: String 
+    population: String
+		residents: Int
+		films: Int
+		created: String 
+    edited: String
+	}
 
 	type Query {
 		peopleData(page: Int, search: String): PeopleData!
 		person(name: String!): AllPersonDetails
+		planet(planetURL: String!): Planet
 	}
 `;
