@@ -9,7 +9,10 @@
   "scripts": {
     "dev": "nodemon ./src/index.ts",
     "start:prod": "node ./build/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "tslint": "tslint --project tsconfig.json",
+    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:write": "yarn prettier:base -- --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "apollo-datasource-rest": "^0.13.0",
