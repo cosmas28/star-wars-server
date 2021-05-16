@@ -5,18 +5,36 @@ export const typeDefs = gql`
 		count: Int
 		next: String
 		previous: String
-		people: [Person]!
+		people: [BasicPersonDetails]!
 	}
-	type Person {
+	type BasicPersonDetails {
 		name: String!
 		height: String
 		gender: String
 		mass: String 
 		homeworld: String
 	}
+	type AllPersonDetails {
+		name: String
+		height: String 
+		mass: String
+		hairColor: String 
+		skinColor: String
+		eyeColor: String
+		birthYear: String
+		gender: String
+		homeworld: String
+		films: Int
+		species: Int
+		vehicles: Int
+		starships: Int
+		created: String
+		edited: String
+		url: String
+	}
 
 	type Query {
 		peopleData(page: Int, search: String): PeopleData!
-		person(name: String!): PeopleData
+		person(name: String!): AllPersonDetails
 	}
 `;

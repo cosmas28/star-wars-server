@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-type APIResponseType = {
+type APIDataType = {
 	count: number;
 	next: string;
 	previous: string;
-	results: APIResultType[];
+	results: APIPersonDataType[];
 };
 
-type APIResultType = {
+export type APIPersonDataType = {
 	name: string;
 	height: string; 
 	mass: string;
@@ -50,7 +50,7 @@ export class PeopleAPI extends RESTDataSource {
 		this.baseURL = process.env.STAR_WARS_BASE_URL;
 	}
 
-	peopleReducer(peopleData: APIResponseType): PeopleData {
+	peopleReducer(peopleData: APIDataType): PeopleData {
 		return {
 			count: peopleData.count,
 			next: peopleData.next,
@@ -59,13 +59,23 @@ export class PeopleAPI extends RESTDataSource {
 		}
 	}
 
-	personReducer(person: APIResultType): Person {
+	personReducer(person: APIPersonDataType): Person {
 		return {
 			name: person.name,
 			height: person.height,
 			gender: person.gender,
 			mass: person.mass,
 			homeworld: person.homeworld,
+		}
+	}
+
+	allPersonDetailsReducer(allPersonDetails: APIPersonDataType) {
+		return {
+			...allPersonDetails,
+			films: allPersonDetails.films.length,
+			species: allPersonDetails.species.length,
+			vehicles: allPersonDetails.vehicles.length,
+			starships: allPersonDetails.starships.length,
 		}
 	}
 
@@ -78,6 +88,6 @@ export class PeopleAPI extends RESTDataSource {
 	async getPersonByName(name: string) {
 		const response = await this.get("people", {search: name});
 
-		return this.peopleReducer(response);
+		return this.allPersonDetailsReducer(response.results[0]);
 	}
 }
