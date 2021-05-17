@@ -32,4 +32,4 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
-export { dataSources, typeDefs, resolvers, PlanetAPI, PeopleAPI, ApolloServer, server };
+export { dataSources, typeDefs, resolvers, PlanetAPI, PeopleAPI, ApolloServer, server, app };

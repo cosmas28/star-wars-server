@@ -1,9 +1,5 @@
-import { HttpLink } from 'apollo-link-http';
-import fetch from 'node-fetch';
-import { execute, toPromise } from 'apollo-link';
-import { dataSources, typeDefs, resolvers, PlanetAPI, PeopleAPI, ApolloServer, server } from '.';
-
-module.exports.toPromise = toPromise;
+import { toPromise } from 'apollo-link';
+import { typeDefs, resolvers, PlanetAPI, PeopleAPI, ApolloServer } from '.';
 
 const constructTestServer = () => {
   const peopleAPI = new PeopleAPI();
@@ -18,4 +14,4 @@ const constructTestServer = () => {
   return { server, peopleAPI, planetAPI };
 };
 
-export { constructTestServer };
+export { constructTestServer, toPromise };
