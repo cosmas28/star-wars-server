@@ -18,6 +18,6 @@ export const resolvers = {
     person: (_: any, { name }: { name: string }, { dataSources }: DataSourceType) =>
       dataSources.peopleAPI.getPersonByName(name),
     planet: (_: any, { id }: { id: string }, { dataSources }: DataSourceType) =>
-      dataSources.planetAPI.getPlanet(id),
+      dataSources.planetAPI.getPlanetById(id),
   },
 };

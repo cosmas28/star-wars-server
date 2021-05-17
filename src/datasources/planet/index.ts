@@ -6,7 +6,7 @@ export class PlanetAPI extends RESTDataSource {
     this.baseURL = 'http://swapi.dev/api/planets/';
   }
 
-  async getPlanet(id: string) {
+  async getPlanetById(id: string) {
     const response = await this.get(`${id}/`);
 
     return {
