@@ -1,5 +1,4 @@
 import { PeopleAPI } from './';
-
 import { mockPeopleResponse, mockTransformedPeopleResponse, mockPersonResponse } from './mocks';
 
 const mocks = {
