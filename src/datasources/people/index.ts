@@ -55,7 +55,7 @@ export class PeopleAPI extends RESTDataSource {
       count: peopleData.count,
       next: peopleData.next,
       previous: peopleData.previous,
-      people: peopleData.results.map((person) => this.personReducer(person)),
+      people: peopleData.results?.map((person) => this.personReducer(person)),
     };
   }
 
