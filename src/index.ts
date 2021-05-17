@@ -10,20 +10,26 @@ import { typeDefs } from './schema';
 
 dotenv.config();
 
+const dataSources = () => ({
+  peopleAPI: new PeopleAPI(),
+  planetAPI: new PlanetAPI(),
+});
+
 const app = express();
 app.use(cors());
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
-    peopleAPI: new PeopleAPI(),
-    planetAPI: new PlanetAPI(),
-  }),
+  dataSources,
 });
 server.applyMiddleware({ app, path: '/' });
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-  console.log(`Server started at Port: ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server started at Port: ${PORT}`);
+  });
+}
+
+export { dataSources, typeDefs, resolvers, PlanetAPI, PeopleAPI, ApolloServer, server };
