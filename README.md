@@ -7,9 +7,7 @@
 
 The **star-wars-server** is an apollo-graphql server that wrap the [Star Wars API](https://swapi.dev/).
 
-It is live on [Netlify](https://objective-meitner-75b03c.netlify.app/)
-This API server is hosted on [Heroku](https://star-wars-api-billa.herokuapp.com/).
-UI repo is also found on [Github](https://github.com/cosmas28/star-wars-client)
+It is live on [Netlify](https://objective-meitner-75b03c.netlify.app/). This API server is hosted on [Heroku](https://star-wars-api-billa.herokuapp.com/).The UI repo is found on [Github](https://github.com/cosmas28/star-wars-client)
 <br />
 
 # Table of Contents
