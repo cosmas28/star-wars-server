@@ -1,5 +1,9 @@
 import { PeopleAPI } from '../people';
-import { mockPeopleResponse, mockTransformedPeopleResponse, mockPersonResponse } from '../people/mocks';
+import {
+  mockPeopleResponse,
+  mockTransformedPeopleResponse,
+  mockPersonResponse,
+} from '../people/mocks';
 
 const mocks = {
   get: jest.fn(),
@@ -10,7 +14,9 @@ const peopleAPI = new PeopleAPI();
 
 describe('[PeopleAPI.peopleReducer]', () => {
   it('should transform people API results', () => {
-    expect(peopleAPI.peopleReducer(mockPeopleResponse as any)).toEqual(mockTransformedPeopleResponse);
+    expect(peopleAPI.peopleReducer(mockPeopleResponse as any)).toEqual(
+      mockTransformedPeopleResponse
+    );
   });
 });
 

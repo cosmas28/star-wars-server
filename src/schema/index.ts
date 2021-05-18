@@ -47,10 +47,16 @@ export const typeDefs = gql`
     created: String
     edited: String
   }
+  type NotFoundError {
+    errorMessage: String!
+  }
+
+  union PeopleResults = PeopleData | NotFoundError
+  union PersonResults = AllPersonDetails | NotFoundError
 
   type Query {
-    peopleData(page: Int, search: String): PeopleData!
-    person(name: String!): AllPersonDetails
+    peopleData(page: Int, search: String): PeopleResults!
+    person(name: String!): PersonResults
     planet(id: String!): Planet
   }
 `;
