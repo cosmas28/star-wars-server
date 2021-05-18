@@ -14,6 +14,6 @@ describe('[PlanetAPI.getPlanetById]', () => {
     const response = await planetAPI.getPlanetById('1');
 
     expect(response).toEqual(transformedPlanetResponse);
-    expect(mocks.get).toBeCalledWith('1/');
+    expect(mocks.get).toBeCalledWith('planets/1/');
   });
 });

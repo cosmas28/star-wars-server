@@ -9,7 +9,7 @@ const peopleAPI = new PeopleAPI();
 (peopleAPI as any).get = mocks.get;
 
 describe('[PeopleAPI.peopleReducer]', () => {
-  it('should transform people results', () => {
+  it('should transform people API results', () => {
     expect(peopleAPI.peopleReducer(mockPeopleResponse as any)).toEqual(mockTransformedPeopleResponse);
   });
 });

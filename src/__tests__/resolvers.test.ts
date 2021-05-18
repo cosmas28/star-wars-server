@@ -20,7 +20,7 @@ const mockContext: any = {
 describe('[Query.peopleData]', () => {
   const { getAllPeople } = mockContext.dataSources.peopleAPI;
 
-  it('should call look from the people api', async () => {
+  it('should call lookup from the people api', async () => {
     getAllPeople.mockReturnValueOnce([mockPeopleDataResolverResponse]);
 
     const response = await resolvers.Query.peopleData(null, {page: 1, search: ''}, mockContext);
@@ -31,7 +31,7 @@ describe('[Query.peopleData]', () => {
 describe('[Query.getPersonByName]', () => {
   const { getPersonByName } = mockContext.dataSources.peopleAPI;
 
-  it('should call look from the people api', async () => {
+  it('should call lookup from the people api', async () => {
     getPersonByName.mockReturnValueOnce(mockPersonResolverResponse);
 
     const response = await resolvers.Query.person(null, {name: ''}, mockContext);
@@ -42,7 +42,7 @@ describe('[Query.getPersonByName]', () => {
 describe('[Query.getPlanetById]', () => {
   const { getPlanetById } = mockContext.dataSources.planetAPI;
 
-  it('should call look from the planet api', async () => {
+  it('should call lookup from the planet api', async () => {
     getPlanetById.mockReturnValueOnce(mockPlanetRosolverResponse);
 
     const response = await resolvers.Query.planet(null, {id: ''}, mockContext);
