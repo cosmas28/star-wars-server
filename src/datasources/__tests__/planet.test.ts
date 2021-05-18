@@ -1,12 +1,12 @@
-import { PlanetAPI } from './';
-import { mockPlanetAPIResponse, transformedPlanetResponse } from './mocks';
+import { PlanetAPI } from '../planet';
+import { mockPlanetAPIResponse, transformedPlanetResponse } from '../planet/mocks';
 
 const mocks = {
   get: jest.fn(),
 };
 
 const planetAPI = new PlanetAPI();
-planetAPI.get = mocks.get;
+(planetAPI as any).get = mocks.get;
 
 describe('[PlanetAPI.getPlanetById]', () => {
   it('should fetch a planet by id', async () => {

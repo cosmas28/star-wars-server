@@ -1,63 +1,51 @@
-import { resolvers } from './';
+import { resolvers } from '../resolvers';
 import {
   mockPeopleDataResolverResponse,
   mockPersonResolverResponse,
   mockPlanetRosolverResponse,
-} from './mocks';
+} from '../resolvers/mocks';
+
+const mockContext: any = {
+  dataSources: {
+    peopleAPI: {
+      getAllPeople: jest.fn(),
+      getPersonByName: jest.fn(),
+    },
+    planetAPI: {
+      getPlanetById: jest.fn(),
+    },
+  },
+};
 
 describe('[Query.peopleData]', () => {
-  const mockContext = {
-    dataSources: {
-      peopleAPI: {
-        getAllPeople: jest.fn(),
-      },
-    },
-  };
-
   const { getAllPeople } = mockContext.dataSources.peopleAPI;
 
   it('should call look from the people api', async () => {
     getAllPeople.mockReturnValueOnce([mockPeopleDataResolverResponse]);
 
-    const response = await resolvers.Query.peopleData(null, {}, mockContext);
+    const response = await resolvers.Query.peopleData(null, {page: 1, search: ''}, mockContext);
     expect(response).toEqual([mockPeopleDataResolverResponse]);
   });
 });
 
 describe('[Query.getPersonByName]', () => {
-  const mockContext = {
-    dataSources: {
-      peopleAPI: {
-        getPersonByName: jest.fn(),
-      },
-    },
-  };
-
   const { getPersonByName } = mockContext.dataSources.peopleAPI;
 
   it('should call look from the people api', async () => {
     getPersonByName.mockReturnValueOnce(mockPersonResolverResponse);
 
-    const response = await resolvers.Query.person(null, {}, mockContext);
+    const response = await resolvers.Query.person(null, {name: ''}, mockContext);
     expect(response).toEqual(mockPersonResolverResponse);
   });
 });
 
 describe('[Query.getPlanetById]', () => {
-  const mockContext = {
-    dataSources: {
-      planetAPI: {
-        getPlanetById: jest.fn(),
-      },
-    },
-  };
-
   const { getPlanetById } = mockContext.dataSources.planetAPI;
 
   it('should call look from the planet api', async () => {
     getPlanetById.mockReturnValueOnce(mockPlanetRosolverResponse);
 
-    const response = await resolvers.Query.planet(null, {}, mockContext);
+    const response = await resolvers.Query.planet(null, {id: ''}, mockContext);
     expect(response).toEqual(mockPlanetRosolverResponse);
   });
 });

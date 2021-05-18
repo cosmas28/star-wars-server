@@ -13,7 +13,7 @@ describe('Queries', () => {
   it('should fetch all people', async () => {
     const { server, peopleAPI } = constructTestServer();
 
-    peopleAPI.get = jest.fn(() => [mockPeopleResponse]) as any;
+    (peopleAPI as any).get = jest.fn(() => [mockPeopleResponse]);
 
     const { query } = createTestClient(server);
     const response = await query({ query: GET_PEOPLE_DATA });
@@ -24,7 +24,7 @@ describe('Queries', () => {
   it('should fetch a person by name', async () => {
     const { server, peopleAPI } = constructTestServer();
 
-    peopleAPI.get = jest.fn(() => [mockPeopleResponse]) as any;
+    (peopleAPI as any).get = jest.fn(() => [mockPeopleResponse]);
 
     const { query } = createTestClient(server);
     const response = await query({
@@ -38,7 +38,7 @@ describe('Queries', () => {
   it('should fetch a planet by id', async () => {
     const { server, planetAPI } = constructTestServer();
 
-    planetAPI.get = jest.fn(() => [mockPlanetAPIResponse]) as any;
+    (planetAPI as any).get = jest.fn(() => [mockPlanetAPIResponse]);
 
     const { query } = createTestClient(server);
     const response = await query({ query: GET_PLANET_DETAILS_BY_ID, variables: { id: '1' } });
